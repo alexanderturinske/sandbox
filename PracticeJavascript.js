@@ -366,4 +366,89 @@ describe('Recursion', function() {
 			expect(facta(4)).to.eql([1,1,2,6,24]);
 		});			
 	});
+	describe('Power', function(){
+		var power = function(base, exp) {
+			// base case
+			if (exp === 0) {
+				return 1;
+			}
+			// recursive case
+			return base * power(base, exp - 1);
+		};
+		it('should work for base case', function() {
+			expect(power(2,0)).to.eql(1);
+		});
+		it('should work for random case', function() {
+			var random = Math.floor(Math.random()*10);
+			expect(power(2, random)).to.eql(Math.pow(2, random));
+		});
+		it('should work for random case', function() {
+			var random = Math.floor(Math.random()*10);
+			expect(power(2, random)).to.eql(Math.pow(2, random));
+		});
+		it('should work for random case', function() {
+			var random = Math.floor(Math.random()*10);
+			expect(power(2, random)).to.eql(Math.pow(2, random));
+		});
+		it('should work for random case', function() {
+			var random = Math.floor(Math.random()*10);
+			expect(power(2, random)).to.eql(Math.pow(2, random));
+		});	
+	});
+	describe('Binary Search', function() {
+		var bins = function(target, array) {
+			var num = Math.floor(array.length/2);
+			// base case
+			if (array[num] === target) {
+				return true;
+			}
+			if (array.length === 1) {
+				return false;
+			}
+			// recursive case
+			if (array[num] < target) {
+				var newArray = array.slice(num);
+				return bins(target, newArray);
+			} else {
+				var newArray = array.slice(0, num);
+				return bins(target, newArray);
+			}
+		};
+		it('should work for base case', function() {
+			expect(bins(2, [2])).to.eql(true);
+		});
+		it('should work for recursive case', function() {
+			expect(bins(2, [1,2,3])).to.eql(true);
+		});
+		it('should work for recursive case', function() {
+			expect(bins(2, [1,2,3,4])).to.eql(true);
+		});
+		it('should work for number at the beginning of the array', function() {
+			expect(bins(2, [1,2,3,4,5,6])).to.eql(true);
+		});	
+		it('should work for number at end of array', function() {
+			expect(bins(6, [1,2,3,4,5,6,])).to.eql(true);
+		});
+		it('should work for when the array does not contain the target', function() {
+			expect(bins(8, [1,3,4,5,6,7,9,10,11,12,13,14,15,16,17])).to.eql(false);
+		});
+	})
+	describe('tagCount', function(){
+
+    //Yes, we could totally use getElementsByTagName to find this as well.
+    // But a demonstration of its usefulness is nice. 
+    it('Should match results of getElementsByClassName.length', function(){
+      htmlStrings.forEach(function(htmlString){
+        var $rootElement = $(htmlString);
+        $('body').append($rootElement);
+
+        var result = tagCount(document.body, 'ARTICLE');
+        var expected = document.getElementsByClassName('targetArticle').length;
+        expect(result).to.equal(expected);
+
+        $rootElement.remove();
+      });
+      $('body').removeClass('targetClassName');
+    });
+  });
 });
