@@ -433,22 +433,4 @@ describe('Recursion', function() {
 			expect(bins(8, [1,3,4,5,6,7,9,10,11,12,13,14,15,16,17])).to.eql(false);
 		});
 	})
-	describe('tagCount', function(){
-
-    //Yes, we could totally use getElementsByTagName to find this as well.
-    // But a demonstration of its usefulness is nice. 
-    it('Should match results of getElementsByClassName.length', function(){
-      htmlStrings.forEach(function(htmlString){
-        var $rootElement = $(htmlString);
-        $('body').append($rootElement);
-
-        var result = tagCount(document.body, 'ARTICLE');
-        var expected = document.getElementsByClassName('targetArticle').length;
-        expect(result).to.equal(expected);
-
-        $rootElement.remove();
-      });
-      $('body').removeClass('targetClassName');
-    });
-  });
 });
