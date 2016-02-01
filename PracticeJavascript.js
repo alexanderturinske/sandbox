@@ -437,4 +437,36 @@ describe('Recursion', function() {
 			expect(bins(8, [1,3,4,5,6,7,9,10,11,12,13,14,15,16,17])).to.eql(-1);
 		});
 	})
+	describe('Factorial From Array', function() {
+		var counting = function(num) {
+			var array = [];
+			while (num > 0) {
+				array.unshift(num);
+				num--;
+			}
+			return array;
+		};
+		var factorialPop = function(n) {
+			var array = counting(n);
+			var val = array.pop();
+			var x = array.length;
+			// termination case
+			if (n < 0) {
+				return console.log('Nope');
+			// base case
+			} else if (x === 0) {
+				return 1;
+			}
+			return val * factorialPop(n - 1);
+		};
+		it('should work for termination case', function() {
+			expect(factorialPop(-5)).to.eql();
+		});
+		it('should work for base case', function() {
+			expect(factorialPop(0)).to.eql(1);
+		});
+		it('should work for number', function() {
+			expect(factorialPop(3)).to.eql(6);
+		});
+	});
 });
