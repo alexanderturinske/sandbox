@@ -211,6 +211,18 @@ describe ('Chapter 4', function() {
 
 describe('Recursion', function() {
 	describe('Fibonacci Sequence', function() {
+		var fibonacci = function(n) {
+			if (n < 0) {
+				var inv = 'Your input was invalid!'
+				return inv;
+			} else if (n === 0) {
+				return 0;
+			} else if (n < 2) {
+				return 1;
+			}
+			return fibonacci(n - 1) + fibonacci(n - 2)
+
+		}
 		/*
 		var fibonacci = function(n) {
 			if (arguments.length === 1) {
@@ -234,6 +246,7 @@ describe('Recursion', function() {
 			return fibonacci(n-1, arguments[2], fibNum);
 		};
 		*/
+		/*
 		var fibonacci = function(n) {
 			// termination cases
 			if (n < 0) {
@@ -247,7 +260,7 @@ describe('Recursion', function() {
 			}
 			return fibonacci(n - 1) + fibonacci(n - 2);
 		};
-
+		*/
 		it('should work for termination case', function() {
 			expect(fibonacci(-1)).to.eql('Your input was invalid!');
 		});
@@ -270,6 +283,19 @@ describe('Recursion', function() {
 
 	describe('Tribonacci Sequence', function() {
 		var tribonacci = function(n) {
+			// termination case
+			if (n < 0) {
+				var inv = 'Your input was invalid!';
+				return inv;
+			} else if (n === 0) {
+				return 0;
+			} else if (n <= 2) {
+				return 1;
+			}
+			return tribonacci(n - 1) + tribonacci(n - 2) + tribonacci(n - 3);
+		}
+		/*
+		var tribonacci = function(n) {
 			// termination cases
 			if (n < 0) {
 				var str = 'Your input was invalid!'
@@ -283,7 +309,7 @@ describe('Recursion', function() {
 			// recursive case
 			return tribonacci(n-1) + tribonacci(n-2) + tribonacci(n-3);
 		};
-
+		*/
 		it('should work for termination case', function() {
 			expect(tribonacci(-1)).to.eql('Your input was invalid!');
 		});
@@ -311,6 +337,18 @@ describe('Recursion', function() {
 	});
 	describe('Factorial', function() {
 		var facto = function(n) {
+			// termination case
+			if (n < 0) {
+				return;
+			// base case
+			} else if (n === 0) {
+				return 1;
+			// recursive case
+			}
+			return n * facto(n - 1);
+		}
+		/*
+		var facto = function(n) {
 			// terminatin case
 			if (n < 0) {
 				return console.log('Your input was invalid!');
@@ -320,6 +358,7 @@ describe('Recursion', function() {
 			}
 			return n*facto(n-1);
 		};
+		*/
 		it('should work for termination case', function() {
 			expect(facto(-1)).to.eql();
 		});
@@ -338,6 +377,24 @@ describe('Recursion', function() {
 	});
 	describe('Factorial Array', function() {
 		var facta = function(n, result) {
+			if (!result) {
+				var result = [];
+			}
+			// termination case
+			if (n < 0) {
+				return;
+			// base case
+			} else if (n === 0) {
+				result.push(1);
+			// recursive case
+			} else {
+				facta(n - 1, result);
+				result.push(n * result[n - 1]);
+			}
+			return result;
+		}
+		/*
+		var facta = function(n, result) {
 			if (!result) {var result = [];}
 			// termination case
 			if (n < 0) {
@@ -350,6 +407,7 @@ describe('Recursion', function() {
 			}
 			return result; 
 		};
+		*/
 		it('should work for termination case', function() {
 			expect(facta(-1)).to.eql();
 		});
@@ -368,6 +426,17 @@ describe('Recursion', function() {
 	});
 	describe('Power', function(){
 		var power = function(base, exp) {
+			// termination case
+			if (exp < 0) {
+				return;
+			// base case
+			} else if (exp === 0) {
+				return 1;
+			}
+			return base * power(base, exp - 1);
+		}
+		/*
+		var power = function(base, exp) {
 			// base case
 			if (exp === 0) {
 				return 1;
@@ -375,6 +444,7 @@ describe('Recursion', function() {
 			// recursive case
 			return base * power(base, exp - 1);
 		};
+		*/
 		it('should work for base case', function() {
 			expect(power(2,0)).to.eql(1);
 		});
@@ -397,6 +467,10 @@ describe('Recursion', function() {
 	});
 	describe('Binary Search', function() {
 		var bins = function(target, array) {
+
+		}
+		/*
+		var bins = function(target, array) {
 			var index;
 			arguments.length === 2 ? index = 0 : index = arguments[2];
 			var num = Math.floor(array.length/2);
@@ -418,6 +492,7 @@ describe('Recursion', function() {
 				return bins(target, newArray, index);
 			}
 		};
+		*/
 		it('should work for base case', function() {
 			expect(bins(2, [2])).to.eql(0);
 		});
@@ -436,7 +511,7 @@ describe('Recursion', function() {
 		it('should work for when the array does not contain the target', function() {
 			expect(bins(8, [1,3,4,5,6,7,9,10,11,12,13,14,15,16,17])).to.eql(-1);
 		});
-	})
+	});
 	describe('Factorial From Array', function() {
 		var counting = function(num) {
 			var array = [];
@@ -448,17 +523,9 @@ describe('Recursion', function() {
 		};
 		var factorialPop = function(n) {
 			var array = counting(n);
-			var val = array.pop();
-			var x = array.length;
-			// termination case
-			if (n < 0) {
-				return console.log('Nope');
-			// base case
-			} else if (x === 0) {
-				return 1;
-			}
-			return val * factorialPop(n - 1);
-		};
+			
+
+		}
 		it('should work for termination case', function() {
 			expect(factorialPop(-5)).to.eql();
 		});
@@ -467,6 +534,158 @@ describe('Recursion', function() {
 		});
 		it('should work for number', function() {
 			expect(factorialPop(3)).to.eql(6);
+		});
+	});
+	describe('Fibonacci round two', function() {
+		/*
+		var fibonacci = function(n) {
+			// termination case
+			if (n < 0) {
+				return console.log('Nope');
+			// base cases
+			} else if (n === 0) {
+				return 0;
+			} else if (n <= 2) {
+				return 1;
+			}
+			return fibonacci(n - 1) + fibonacci(n-2);
+		};
+		*/
+		it('should work for termination case', function() {
+			expect(fibonacci(-5)).to.eql();
+		});
+		it('should work for base case', function() {
+			expect(fibonacci(0)).to.eql(0);
+		});
+		it('should work for base case', function() {
+			expect(fibonacci(1)).to.eql(1);
+		});	
+		it('should work for base case', function() {
+			expect(fibonacci(2)).to.eql(1);
+		});			
+		it('should work for number', function() {
+			expect(fibonacci(3)).to.eql(2);
+		});
+	});
+	describe('CountDown', function() {
+		/*
+		var countDown = function(n) {
+			// termination case
+			if (n < 0) {
+				return console.log('Stop');
+			} else if (n === 0) {
+				console.log(n);
+				return;
+			}
+			console.log(n);
+			countDown(n-1);
+		};
+		*/
+		/*
+		var countDown = function(n) {
+			// termination case
+			if (n < 0) {
+				console.log('Stop');
+			} else if (n === 0) {
+				console.log(n);
+			} else {
+				console.log(n);
+				countDown(n-1);
+			}
+		};
+		*/
+		/*
+		var countDown = function(n) {
+			var array;
+			!arguments[1] ? array = [] : array = arguments[1];
+			// termination case
+			if (n < 0) {
+				return console.log('Stop');
+			// base case
+			} else if (n === 0) {
+				array.push(0);
+			// recursive case
+			} else {
+				array.push(n);
+				countDown(n-1, array);
+			}
+			return array;
+		}
+		*/	
+		it('should work for termination case', function() {
+			expect(countDown(-5)).to.eql();
+		});	
+		it('should work for base case', function() {
+			expect(countDown(0)).to.eql();
+		});
+		it('should work for recursive case', function() {
+			expect(countDown(5)).to.eql();
+		});	
+		/*
+		it('should work for termination case', function() {
+			expect(countDown(-5)).to.eql();
+		});	
+		it('should work for base case', function() {
+			expect(countDown(0)).to.eql([0]);
+		});
+		it('should work for recursive case', function() {
+			expect(countDown(5)).to.eql([5,4,3,2,1,0]);
+		});
+		*/
+	});
+	describe('reversing array', function() {
+		var array = [1,2,3,4,5,6,7];
+		var reversed = [7,6,5,4,3,2,1];
+		var reversing = function(array) {
+			var reversed;
+			!arguments[1] ? reversed = [] : reversed = arguments[1];
+			var element = array.pop();
+			var x = array.length;
+			// termination case
+			if (!Array.isArray(array)) {
+				return;
+			} else if (x === 0) {
+				reversed.push(element);
+			} else {
+				reversed.push(element);
+				reversing(array, reversed);
+			}
+			return reversed;
+		}	
+		/*
+		var reversing = function(array) {
+			var temp;
+			!arguments[1] ? temp = [] : temp = arguments[1];
+			var val = array.pop();
+			var x = array.length;
+			if (x === 0) {
+				temp.push(val);
+				return temp;
+			}
+			temp.push(val);
+			return reversing(array, temp);
+		};
+		*/
+		/*
+		var reversing = function(array) {
+			var temp = [];
+			var reverse = function(arr, rev) {
+				var value = arr.pop();
+				var x = arr.length;
+				if (x === 0) {
+					rev.push(value);
+					return;
+				}
+				rev.push(value);
+				reverse(arr, rev);
+			};
+			reverse(array, temp);
+			return temp;
+		};
+		*/
+
+		it('should work for array', function() {
+			expect(reversing(array)).to.eql(reversed);
 		});
 	});
 });
